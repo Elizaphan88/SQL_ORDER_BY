@@ -1,0 +1,96 @@
+Fact 1: Distribution of Content Types (Movies vs. TV Shows)
+Finding out the distribution of content types (Movies and TV Shows) available on Netflix.
+
+SELECT 
+    type,
+    COUNT(*) AS count,
+    ROUND((COUNT(*) * 100.0) / (SELECT COUNT(*) FROM netflix_titles), 2) AS percentage
+FROM netflix_titles
+GROUP BY type;
+
+Fact 2: Top 5 Countries with the Most Content
+
+SELECT 
+    country,
+    COUNT(*) AS count
+FROM netflix_titles
+WHERE country IS NOT NULL
+GROUP BY country
+ORDER BY count DESC
+LIMIT 5;
+
+Fact 3: Average Release Year of Movies and TV Shows
+SELECT 
+    type,
+    AVG(release_year) AS avg_release_year
+FROM netflix_titles
+WHERE release_year IS NOT NULL
+GROUP BY type;
+
+
+Distribution of Content Types: This will give us the percentage of Movies and TV Shows in the Netflix dataset.
+
+SELECT 
+    type,
+    COUNT(*) AS count,
+    ROUND((COUNT(*) * 100.0) / (SELECT COUNT(*) FROM netflix_titles), 2) AS percentage
+FROM netflix_titles
+GROUP BY type;
+
+Top 5 Countries with the Most Content: This will show the top 5 countries with the most content available on Netflix.
+
+SELECT 
+    country,
+    COUNT(*) AS count
+FROM netflix_titles
+WHERE country IS NOT NULL
+GROUP BY country
+ORDER BY count DESC
+LIMIT 5;
+
+
+
+Question 1: What are the top 5 countries producing the most Movies and TV Shows on Netflix?
+
+SELECT 
+    country,
+    COUNT(*) AS count
+FROM netflix_titles
+WHERE country IS NOT NULL
+GROUP BY country
+ORDER BY count DESC
+LIMIT 5;
+
+ountry	Count
+United States	17
+Japan	13
+India	6
+United Kingdom	5
+
+
+Question 2: What are the top 10 longest-running TV Shows available on Netflix?
+
+SELECT 
+    title,
+    duration
+FROM netflix_titles
+WHERE type = 'TV Show'
+ORDER BY duration DESC
+LIMIT 10;
+
+Title	Duration
+The Great British Baking Show	9 Seasons
+Saved by the Bell	9 Seasons
+Nailed It	6 Seasons
+Lucifer	6 Seasons
+Numberblocks	6 Seasons
+Resurrection: Ertugrul	5 Seasons
+Jack Whitehall: Travels with My Father	5 Seasons
+Mighty Raju	4 Seasons
+Dear White People	4 Seasons
+Sex Education	3 Seasons
+
+
+
+
+From the answers, it's evident that the United States has the highest number of productions on Netflix, followed by Japan, India, and the United Kingdom
